@@ -1,0 +1,37 @@
+# cosmos.yaml
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
+
+  airflow-webserver:
+    image: apache/airflow:2.5.0
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    volumes:
+      - ./.env:/opt/airflow/.env:ro
+      - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+    ports:
+      - "8080:8080"
+
+  airflow-scheduler:
+    image: apache/airflow:2.5.0
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    volumes:
+      - ./.env:/opt/airflow/.env:ro
+      - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
