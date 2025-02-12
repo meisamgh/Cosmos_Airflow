@@ -1,0 +1,8 @@
+apache-airflow==2.5.0
+cosmos-cli
+pytest
+asyncpg
+aiofiles
+python-dotenv
+pyspark
+dlt

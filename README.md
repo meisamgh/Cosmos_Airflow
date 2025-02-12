@@ -23,7 +23,6 @@ my-data-pipeline/
 │   └── test_dags.py             # Tests to ensure DAGs load correctly
 ├── .env                       # Environment variables (DB credentials, file paths, etc.)
 ├── cosmos.yaml                # Cosmos configuration file to orchestrate services
-├── docker-compose.yaml        # (Alternative) Docker Compose file for local Airflow
 ├── README.md                  # Project documentation and instructions
 └── requirements.txt           # Python dependencies
 ````
